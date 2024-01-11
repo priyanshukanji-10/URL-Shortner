@@ -1,22 +1,20 @@
 const express = require("express");
-const mongoose = require("mongoose");
 // Imporing Routers
 const urlRouter = require("./routes/url");
+const redirectRouter = require("./routes/redirect");
+// Creating apps
 const app = express();
-const URL = require("./models/url");
+// Middlewares
+app.use(express.json());
+// Connecting to MongoDB
 const { connectMongoDB } = require("./connect");
 connectMongoDB("mongodb://localhost:27017/short-url").then(() =>
   console.log("Mongodb connected")
 );
-app.use(express.json());
+// Routers
 app.use("/url", urlRouter);
-app.get("/:shortId", async (req, res) => {
-  const shortId = req.params.shortId;
-  const entry = await URL.findOneAndUpdate(
-    { shortId },
-    { $push: { visitHistory: { timestamp: Date.now() } } }
-  );
-  res.redirect(entry.redirectUrl);
-});
+app.use("/:shortId", redirectRouter);
+
+
 const PORT = 5001;
 app.listen(PORT, () => console.log(`Server started at Port:${PORT}`));

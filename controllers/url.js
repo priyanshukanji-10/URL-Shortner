@@ -5,7 +5,7 @@ const generateShortId = () => {
   const shortId = uuid.slice(0, 8);
   return shortId;
 };
-
+// This function creates shortIDs for a given urls and stores it in database
 const handleGenerateShortId = async (req, res) => {
   const shortId = generateShortId();
   const body = req.body;
