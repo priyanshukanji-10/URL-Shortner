@@ -4,21 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HomePage</title>
+    <link rel="stylesheet" href="/css/home.css" />
   </head>
   <body>
-    <H1>URL Shortner</H1>
-    <div class="formContainer">
-      <form method="POST" action="/url">
-        <p>Enter Your Original URL</p>
-        <input type="text" name="url" placeholder="http://example.com" />
-        <button type="submit">Genarate</button>
-      </form>
-    </div>
-    <% if (locals.id) { %>
-    <div class="shortID">
-      <p>URL Genarated http://localhost:5001/<%= id %></p>
-    </div>
+    <div class="container">
+      <!-- Introduction Section -->
+      <div class="introduction">
+        <div class="HeadingContainer">URL Shortner</div>
+      </div>
 
-    <% } %>
+      <!-- Form Section -->
+      <div class="formContainer">
+        <form method="POST" action="/url">
+          <p>Enter Your Original URL</p>
+          <input type="text" name="url" placeholder="http://example.com" />
+          <button type="submit">Generate</button>
+        </form>
+
+        <% if (locals.id) { %>
+        <div class="shortID">
+          <p>URL Generated: http://localhost:5001/<%= id %></p>
+        </div>
+        <% } %>
+      </div>
+    </div>
   </body>
 </html>
