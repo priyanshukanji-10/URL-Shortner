@@ -1,41 +1,30 @@
 const express = require("express");
 const path = require("path");
 
-// Importing Routers
+// Imporing Routers
 const urlRouter = require("./routes/url");
 const redirectRouter = require("./routes/redirect");
 const staticRoute = require("./routes/staticRoute");
-
-// Creating app
+const userRoute = require("./routes/user");
+// Creating apps
 const app = express();
-
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
-// Setting up for Server-Side Rendering using EJS
+// Setting up to Server Side Rendering using EJS
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
-
-// Serving static files from the 'public' directory
-app.use(express.static('public'));
-
+app.use(express.static("public"));
 // Connecting to MongoDB
 const { connectMongoDB } = require("./connect");
-connectMongoDB("mongodb://localhost:27017/short-url")
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.error("MongoDB connection error:", err));
-
+connectMongoDB("mongodb://localhost:27017/short-url").then(() =>
+  console.log("Mongodb connected")
+);
 // Routers
+app.use("/", staticRoute);
 app.use("/url", urlRouter);
 app.use("/", redirectRouter);
-app.use("/", staticRoute);
+app.use("/", userRoute);
 
-// Define a catch-all route for any unmatched routes
-app.use((req, res) => {
-  res.status(404).send("Page not found");
-});
-
-// Start the server
-const PORT = process.env.PORT || 5001;
-app.listen(PORT, () => console.log(`Server started at Port: ${PORT}`));
+const PORT = 5001;
+app.listen(PORT, () => console.log(`Server started at Port:${PORT}`));

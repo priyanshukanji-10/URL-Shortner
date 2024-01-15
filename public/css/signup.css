@@ -1,0 +1,80 @@
+body {
+  margin: 0;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+}
+
+.titleContainer {
+  flex: 1;
+  height: 100vh;
+  background-color: #03045e;
+  color: rgb(238, 240, 241);
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signupContainer {
+  flex: 1;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.subSignupContainer {
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2); /* Add a box shadow to the right and bottom sides */
+}
+
+.subSignupContainer h2 {
+  margin-bottom: 20px;
+}
+
+.subSignupContainer form {
+  text-align: left;
+}
+
+.subSignupContainer label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.subSignupContainer input {
+  height: 30px;
+  width: 300px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 8px;
+  transition: border-color 0.3s ease;
+}
+
+.subSignupContainer input:hover {
+  border-color: #4caf50;
+}
+
+.subSignupContainer button {
+  width: 80%;
+  padding: 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.subSignupContainer button:hover {
+  background-color: #45a049;
+}
