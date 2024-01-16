@@ -24,7 +24,7 @@ connectMongoDB("mongodb://localhost:27017/short-url").then(() =>
 app.use("/", staticRoute);
 app.use("/url", urlRouter);
 app.use("/", redirectRouter);
-app.use("/", userRoute);
+app.use("/user", userRoute);
 
 const PORT = 5001;
 app.listen(PORT, () => console.log(`Server started at Port:${PORT}`));
