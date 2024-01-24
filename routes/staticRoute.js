@@ -3,9 +3,11 @@ const Router = express.Router();
 const {
   handleRenderHomePage,
   handleRenderSignupPage,
-  handleRenderLoginPage
+  handleRenderLoginPage,
 } = require("../controllers/staticRoute");
+
 Router.get("/", handleRenderHomePage);
 Router.get("/signup", handleRenderSignupPage);
 Router.get("/login", handleRenderLoginPage);
+
 module.exports = Router;

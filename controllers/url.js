@@ -27,5 +27,13 @@ const handleGenerateShortId = async (req, res) => {
     return res.status(500).json({ error: "Internal Server Error" });
   }
 };
+const handleGetAnalytics = async (req, res) => {
+  let shortId = req.params.shortId;
+  let result = await URL.findOne({ shortId });
+  res.json({
+    totalClicks: result.visitHistory.length,
+    analytics: result.visitHistory,
+  });
+};
 
-module.exports = { handleGenerateShortId };
+module.exports = { handleGenerateShortId, handleGetAnalytics };

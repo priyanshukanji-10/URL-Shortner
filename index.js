@@ -1,16 +1,21 @@
+// Importing Dependencies
 const express = require("express");
 const path = require("path");
+const cookieParser = require("cookie-parser");
 
+// Creating app
+const app = express();
 // Imporing Routers
 const urlRouter = require("./routes/url");
 const redirectRouter = require("./routes/redirect");
 const staticRoute = require("./routes/staticRoute");
 const userRoute = require("./routes/user");
-// Creating apps
-const app = express();
+// Importing Middlewares
+const { restrictToLoggedInUserOnly } = require("./middlewares/auth");
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 // Setting up to Server Side Rendering using EJS
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
@@ -22,7 +27,7 @@ connectMongoDB("mongodb://localhost:27017/short-url").then(() =>
 );
 // Routers
 app.use("/", staticRoute);
-app.use("/url", urlRouter);
+app.use("/url", restrictToLoggedInUserOnly, urlRouter);
 app.use("/", redirectRouter);
 app.use("/user", userRoute);
 

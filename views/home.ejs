@@ -8,9 +8,14 @@
   </head>
   <body>
     <div class="container">
-      <!-- Introduction Section -->
-      <div class="introduction">
-        <div class="HeadingContainer">URL Shortner</div>
+      <!-- Navbar -->
+      <div class="navbar">
+        <div class="logo">URL Shortner</div>
+        <a href="/analytics">Analytics</a>
+        <a href="/profile">Profile</a>
+        <a href="/logout">Logout</a>
+        <a href="/settings">Settings</a>
+        <a href="/help">Help</a>
       </div>
 
       <!-- Form Section -->
@@ -20,13 +25,36 @@
           <input type="text" name="url" placeholder="http://example.com" />
           <button type="submit">Generate</button>
         </form>
-
-        <% if (locals.id) { %>
-        <div class="shortID">
-          <p>URL Generated: http://localhost:5001/<%= id %></p>
-        </div>
-        <% } %>
       </div>
+
+      <% if (locals.id) { %>
+      <div class="shortID">
+        <p>URL Generated: http://localhost:5001/<%= id %></p>
+      </div>
+      <% } %> <% if (locals.urls) { %>
+      <div class="analyticsTableContainer">
+        <table>
+          <thead>
+            <tr>
+              <th>S. NO</th>
+              <th>shortID</th>
+              <th>Redirect URL</th>
+              <th>Clicks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% urls.forEach((url,index) => { %>
+            <tr>
+              <td><%= index+1 %></td>
+              <td><%= url.shortId %></td>
+              <td><%= url.redirectUrl %></td>
+              <td><%= url.visitHistory.length %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+      <% } %>
     </div>
   </body>
 </html>
